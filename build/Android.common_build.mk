@@ -64,6 +64,11 @@ ifndef LIBART_IMG_TARGET_BASE_ADDRESS
   $(error LIBART_IMG_TARGET_BASE_ADDRESS unset)
 endif
 
+# BEGIN Motorola, a5705c, 03/12/2015, IKVPREL1L-8365
+ifeq ($(WITH_MOTO_ART_COMPILER_MEM_OPT),true)
+  ART_TARGET_CFLAGS += -DMOTO_ART_COMPILER_MEM_OPT=1
+endif
+
 # Support for disabling certain builds.
 ART_BUILD_TARGET := false
 ART_BUILD_HOST := false

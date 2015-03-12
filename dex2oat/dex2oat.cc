@@ -2245,6 +2245,15 @@ class Dex2Oat FINAL {
       }
     }
 
+    // BEGIN Motorola, a5705c, 03/12/2015, IKVPREL1L-8365
+#ifdef MOTO_ART_COMPILER_MEM_OPT
+    if (!driver_->IsImage() && swap_fd_ >= 0) {
+      LOG(INFO) << "Shutdown heap";
+      Runtime::Current()->ShutdownHeap();
+    }
+#endif /* MOTO_ART_COMPILER_MEM_OPT */
+    // END IKVPREL1L-836
+
     {
       TimingLogger::ScopedTiming t2("dex2oat Write ELF", timings_);
       linker::MultiOatRelativePatcher patcher(instruction_set_, instruction_set_features_.get());
