@@ -35,9 +35,6 @@
 #include "aarch64/macro-assembler-aarch64.h"
 #pragma GCC diagnostic pop
 
-#include "utils/string_reference.h"
-#include "vixl/a64/disasm-a64.h"
-#include "vixl/a64/macro-assembler-a64.h"
 #include "locations.h"
 
 namespace art {
