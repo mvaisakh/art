@@ -1689,7 +1689,7 @@ size_t CodeGeneratorARM64::SaveBulkLiveCoreRegisters(LocationSummary* locations,
         Register reg1 = Register(VIXLRegCodeFromART(last_reg), kXRegSize);
         Register reg2 = Register(VIXLRegCodeFromART(i), kXRegSize);
         update_location_and_stack_offset(last_reg, stack_offset);
-        if (vixl::AreSameSizeAndType(reg1, reg2)) {
+        if (AreSameSizeAndType(reg1, reg2)) {
           update_location_and_stack_offset(i, (stack_offset + kArm64WordSize));
           __ Stp(reg1, reg2, MemOperand(sp, stack_offset));
           stack_offset += kArm64WordSize + kArm64WordSize;
@@ -1724,7 +1724,7 @@ size_t CodeGeneratorARM64::SaveBulkLiveFpuRegisters(LocationSummary* locations,
         FPRegister reg1 = FPRegister(last_reg, kDRegSize);
         FPRegister reg2 = FPRegister(i, kDRegSize);
         saved_stack_offsets[last_reg] = stack_offset;
-        if (vixl::AreSameSizeAndType(reg1, reg2)) {
+        if (AreSameSizeAndType(reg1, reg2)) {
           saved_stack_offsets[i] = stack_offset + kArm64WordSize;
           __ Stp(reg1, reg2, MemOperand(sp, stack_offset));
           stack_offset += kArm64WordSize + kArm64WordSize;
@@ -1755,7 +1755,7 @@ size_t CodeGeneratorARM64::RestoreBulkLiveCoreRegisters(LocationSummary* locatio
       } else {
         Register reg1 = Register(VIXLRegCodeFromART(last_reg), kXRegSize);
         Register reg2 = Register(VIXLRegCodeFromART(i), kXRegSize);
-        if (vixl::AreSameSizeAndType(reg1, reg2)) {
+        if (AreSameSizeAndType(reg1, reg2)) {
           __ Ldp(reg1, reg2, MemOperand(sp, stack_offset));
           stack_offset += kArm64WordSize + kArm64WordSize;
           last_reg = SIZE_MAX;
@@ -1785,7 +1785,7 @@ size_t CodeGeneratorARM64::RestoreBulkLiveFpuRegisters(LocationSummary* location
       } else {
         FPRegister reg1 = FPRegister(last_reg, kDRegSize);
         FPRegister reg2 = FPRegister(i, kDRegSize);
-        if (vixl::AreSameSizeAndType(reg1, reg2)) {
+        if (AreSameSizeAndType(reg1, reg2)) {
           __ Ldp(reg1, reg2, MemOperand(sp, stack_offset));
           stack_offset += kArm64WordSize + kArm64WordSize;
           last_reg = SIZE_MAX;
