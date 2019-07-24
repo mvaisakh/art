@@ -1517,6 +1517,7 @@ void CodeGenerator::ValidateInvokeRuntimeWithoutRecordingPcInfo(HInstruction* in
 }
 
 void SlowPathCode::SaveLiveRegisters(CodeGenerator* codegen, LocationSummary* locations) {
+  RegisterSet* live_registers = locations->GetLiveRegisters();
   size_t stack_offset = codegen->GetFirstRegisterSlotInSlowPath();
 
   const uint32_t core_spills = codegen->GetSlowPathSpills(locations, /* core_registers */ true);
@@ -1579,6 +1580,7 @@ void SlowPathCode::SaveLiveRegisters(CodeGenerator* codegen, LocationSummary* lo
 }
 
 void SlowPathCode::RestoreLiveRegisters(CodeGenerator* codegen, LocationSummary* locations) {
+  RegisterSet* live_registers = locations->GetLiveRegisters();
   size_t stack_offset = codegen->GetFirstRegisterSlotInSlowPath();
 
   const uint32_t core_spills = codegen->GetSlowPathSpills(locations, /* core_registers */ true);
