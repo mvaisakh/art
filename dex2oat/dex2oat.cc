@@ -53,7 +53,6 @@
 #include <sys/stat.h>
 
 #include "base/logging.h"
-#include "base/stringprintf.h"
 #include "base/unix_file/fd_file.h"
 #endif /* __ANDROID__ */
 // END IKDLUPGRD-2361
